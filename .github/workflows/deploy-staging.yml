@@ -25,6 +25,10 @@ jobs:
       #- name: Pull request merged
       #   if: github.action == 'closed' && github.event.pull_request.merged == 'true' 
       #  run: echo merged        
+      - name: "Login via Azure CLI"
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
@@ -34,8 +38,11 @@ jobs:
           npm ci
           npm run build
           npm test
-      - name: Deploy app to Azure-Staging-Web app using public profile
+      - name: Deploy app to Azure-Staging-Web app
         uses: Azure/webapps-deploy@v2
         with:
          app-name: ${{env.AZURE_WEBAPP_NAME_STAG}}
-         publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+         publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}  
+      - name: Azure logout
+        run: |
+          az logout
