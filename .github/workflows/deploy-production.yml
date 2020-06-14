@@ -10,7 +10,7 @@ on:
   #  types: [opened]
 
 env:
-  DOCKER_IMAGE_NAME: gumbon-azure3-ttt       #need to check & update
+  DOCKER_IMAGE_NAME: team-fpt-ttt       #need to check & update
   IMAGE_REGISTRY_URL: docker.pkg.github.com  #need to check & update
   AZURE_WEBAPP_NAME: team-fpt-calculator-prod 
   ##also need to check secrets name written below
